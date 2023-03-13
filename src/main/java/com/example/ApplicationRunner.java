@@ -1,12 +1,11 @@
 package com.example;
 
 import com.example.database.pool.ConnectionPool;
-import com.example.database.repository.CompanyRepository;
+import com.example.database.repository.CrudRepository;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.Serializable;
-import java.util.Map;
 
 public class ApplicationRunner {
     public static void main(String[] args) {
@@ -22,8 +21,8 @@ public class ApplicationRunner {
 //        ConnectionPool pool2 = context.getBean("pool2", ConnectionPool.class);
             System.out.println("pool1 = " + pool1);
 //        System.out.println("pool2 = " + pool2);
-            CompanyRepository companyRepository = context.getBean("companyRepository", CompanyRepository.class);
-            System.out.println("companyRepository = " + companyRepository);
+            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            System.out.println("companyRepository = " + companyRepository.findById(1));
         }
     }
 }

@@ -12,6 +12,8 @@
     <context:property-placeholder location="application.properties"/>
 
     <bean class="com.example.bpp.InjectBeanPostProcessor"/>
+    <bean class="com.example.bpp.TransactionBeanPostProcessor"/>
+    <bean class="com.example.bpp.AuditingBeanPostProcessor"/>
 <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
 <!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
 <!--        <property name="locations" value="application.properties"/>-->
