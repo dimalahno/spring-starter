@@ -8,75 +8,81 @@
                             http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-<!--    <context:annotation-config/>-->
-    <context:component-scan base-package="com.example"/>
-    <context:property-placeholder location="application.properties"/>
+    <!--    <context:annotation-config/>-->
+    <context:component-scan base-package="com.example"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:include-filter type="assignable" expression="com.example.database.repository.CrudRepository"/>
+        <context:include-filter type="regex" expression="com\..+Repository"/>
+    </context:component-scan>
 
-<!--    <bean class="com.example.bpp.InjectBeanPostProcessor"/>-->
-<!--    <bean class="com.example.bpp.TransactionBeanPostProcessor"/>-->
-<!--    <bean class="com.example.bpp.AuditingBeanPostProcessor"/>-->
-<!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
-<!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
-<!--        <property name="locations" value="application.properties"/>-->
-<!--    </bean>-->
+<!--    <context:property-placeholder location="application.properties"/>-->
 
-<!--    <bean class="com.example.bfpp.LogBeanFactoryPostProcessor"/>-->
-<!--    <bean class="com.example.bfpp.VerifyBeanFactoryPostProcessor"/>-->
+    <!--    <bean class="com.example.bpp.InjectBeanPostProcessor"/>-->
+    <!--    <bean class="com.example.bpp.TransactionBeanPostProcessor"/>-->
+    <!--    <bean class="com.example.bpp.AuditingBeanPostProcessor"/>-->
+    <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
+    <!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
+    <!--        <property name="locations" value="application.properties"/>-->
+    <!--    </bean>-->
+
+    <!--    <bean class="com.example.bfpp.LogBeanFactoryPostProcessor"/>-->
+    <!--    <bean class="com.example.bfpp.VerifyBeanFactoryPostProcessor"/>-->
 
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>
 
-<!--    <bean id="pool2" class="com.example.database.pool.ConnectionPool"/>-->
-<!--    <bean id="pool1" name="p1,p2,p3" class="com.example.database.pool.ConnectionPool"-->
-<!--          init-method="init" destroy-method="destroyBean">-->
-<!--        Важен порядок!-->
-<!--        index (порядок следование аргументов в конструкторе) можем заменить на name-->
-<!--        <constructor-arg index="0" type="java.lang.String" value="postgres"/>-->
-<!--        <constructor-arg name="username" type="java.lang.String" value="${db.username}"/>-->
-<!--        <constructor-arg name="poolSize" type="java.lang.Integer" value="${db.pool.size}"/>-->
-<!--        <constructor-arg name="args" type="java.util.List">-->
-<!--            <list>-->
-<!--                <value>&#45;&#45;arg1=value1</value>-->
-<!--                <value>&#45;&#45;arg2=value2</value>-->
-<!--                <ref bean="driver"/>-->
-<!--            </list>-->
-<!--        </constructor-arg>-->
-<!--        inject by method-->
-<!--        properties когда есть опциональная зависимость -->
-<!--        ${} - Expression language (Java EE) -> #{} - SpEL  -->
-<!--        <property name="properties">-->
-<!--            <map>-->
-<!--                <entry key="url" value="${db.url}"/>-->
-<!--                <entry key="password" value="123"/>-->
-<!--                <entry key="driver" value-ref="driver"/>-->
-<!--                <entry key="driver" value="#{driver.substring(3)}"/>-->
-<!--                <entry key="test" value="#{driver.length() > 10}"/>-->
-<!--                <entry key="test1" value="#{driver.length() > T(Math).random()*10}"/>-->
-<!--                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>-->
-<!--                <entry key="currentUser" value="#{systemProperties['user.name']}"/>-->
-<!--            </map>-->
-<!--        </property>-->
-<!--        <constructor-arg name="properties" type="java.util.Map">-->
-<!--            <map>-->
-<!--                <entry key="url" value="postgresurl"/>-->
-<!--                <entry key="password" value="123"/>-->
-<!--                <entry key="driver" value-ref="driver"/>-->
-<!--            </map>-->
-<!--        </constructor-arg>-->
-<!--    </bean>-->
-<!--    name -> alias saved in aliasMap as name -> id -->
-<!--    <bean id="pool2" name="p4" class="com.example.database.pool.ConnectionPool"/>-->
+    <!--    <bean id="pool2" class="com.example.database.pool.ConnectionPool"/>-->
+    <!--    <bean id="pool1" name="p1,p2,p3" class="com.example.database.pool.ConnectionPool"-->
+    <!--          init-method="init" destroy-method="destroyBean">-->
+    <!--        Важен порядок!-->
+    <!--        index (порядок следование аргументов в конструкторе) можем заменить на name-->
+    <!--        <constructor-arg index="0" type="java.lang.String" value="postgres"/>-->
+    <!--        <constructor-arg name="username" type="java.lang.String" value="${db.username}"/>-->
+    <!--        <constructor-arg name="poolSize" type="java.lang.Integer" value="${db.pool.size}"/>-->
+    <!--        <constructor-arg name="args" type="java.util.List">-->
+    <!--            <list>-->
+    <!--                <value>&#45;&#45;arg1=value1</value>-->
+    <!--                <value>&#45;&#45;arg2=value2</value>-->
+    <!--                <ref bean="driver"/>-->
+    <!--            </list>-->
+    <!--        </constructor-arg>-->
+    <!--        inject by method-->
+    <!--        properties когда есть опциональная зависимость -->
+    <!--        ${} - Expression language (Java EE) -> #{} - SpEL  -->
+    <!--        <property name="properties">-->
+    <!--            <map>-->
+    <!--                <entry key="url" value="${db.url}"/>-->
+    <!--                <entry key="password" value="123"/>-->
+    <!--                <entry key="driver" value-ref="driver"/>-->
+    <!--                <entry key="driver" value="#{driver.substring(3)}"/>-->
+    <!--                <entry key="test" value="#{driver.length() > 10}"/>-->
+    <!--                <entry key="test1" value="#{driver.length() > T(Math).random()*10}"/>-->
+    <!--                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>-->
+    <!--                <entry key="currentUser" value="#{systemProperties['user.name']}"/>-->
+    <!--            </map>-->
+    <!--        </property>-->
+    <!--        <constructor-arg name="properties" type="java.util.Map">-->
+    <!--            <map>-->
+    <!--                <entry key="url" value="postgresurl"/>-->
+    <!--                <entry key="password" value="123"/>-->
+    <!--                <entry key="driver" value-ref="driver"/>-->
+    <!--            </map>-->
+    <!--        </constructor-arg>-->
+    <!--    </bean>-->
+    <!--    name -> alias saved in aliasMap as name -> id -->
+    <!--    <bean id="pool2" name="p4" class="com.example.database.pool.ConnectionPool"/>-->
 
-<!--    fabric method -> factory-method -->
+    <!--    fabric method -> factory-method -->
 
-<!--    fabric method -> factory-bean принимает на вход другой бин, который занимается инициализацией (патерн Фабрика) -->
+    <!--    fabric method -> factory-bean принимает на вход другой бин, который занимается инициализацией (патерн Фабрика) -->
 
-<!--    Важен порядок инициализации бинов!-->
+    <!--    Важен порядок инициализации бинов!-->
 
-<!--    <bean id="companyRepository" class="com.example.database.repository.CompanyRepository" factory-method="of">-->
-<!--        <constructor-arg ref="pool1"/>-->
-<!--    </bean>-->
+    <!--    <bean id="companyRepository" class="com.example.database.repository.CompanyRepository" factory-method="of">-->
+    <!--        <constructor-arg ref="pool1"/>-->
+    <!--    </bean>-->
 
     <bean id="companyRepository" class="com.example.database.repository.CompanyRepository"/>
 

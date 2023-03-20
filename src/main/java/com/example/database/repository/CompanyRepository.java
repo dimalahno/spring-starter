@@ -5,12 +5,15 @@ import com.example.bpp.Transaction;
 import com.example.database.entity.Company;
 import com.example.database.pool.ConnectionPool;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Optional;
 
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Repository
 @Transaction
 @Auditing
