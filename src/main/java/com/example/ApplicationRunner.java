@@ -16,7 +16,10 @@ public class ApplicationRunner {
         System.out.println(Serializable.class.isAssignableFrom(value.getClass()));
 
 //        try (var context = new ClassPathXmlApplicationContext("application.xml")){
-        try (var context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class)) {
+        try (var context = new AnnotationConfigApplicationContext()) {
+            context.register(ApplicationConfiguration.class);
+            context.getEnvironment().setActiveProfiles("web", "prod");
+            context.refresh();
             ConnectionPool connectionPool = context.getBean("pool1", ConnectionPool.class);
 //        ConnectionPool pool2 = context.getBean("pool2", ConnectionPool.class);
             System.out.println("connectionPool = " + connectionPool);
