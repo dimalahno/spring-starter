@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import jakarta.annotation.PostConstruct;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,10 +1,9 @@
 package com.example.database.pool;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 @Component("pool1")
 public class ConnectionPool{
@@ -22,7 +21,7 @@ public class ConnectionPool{
     }
 
     @PreDestroy
-    public void destroy() throws Exception {
+    public void destroy() {
         System.out.println("Clean Connection Pool");
     }
 }
